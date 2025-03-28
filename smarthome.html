@@ -1,8 +1,8 @@
 <html>
-    <b>Hello openShare!</b>
+    <b>Hello showToast!</b>
     <script>
         function xxx(){
-            WebViewJavascriptBridge.callHandler("openShare",function(res){alert(JSON.stringify(res))});
+            WebViewJavascriptBridge.callHandler("showToast",function(res){alert(JSON.stringify(res))});
         }
         location.href="wvjbscheme://__BRIDGE_LOADED__";
         setTimeout(xxx,2000);
