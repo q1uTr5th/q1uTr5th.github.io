@@ -2,7 +2,7 @@
     <b>Hello!</b>
     <script>
         function xxx(){
-            WebViewJavascriptBridge.callHandler("jsApiHandler",function(res){alert(JSON.stringify(res))});
+            WebViewJavascriptBridge.callHandler("openPage",function(res){alert(JSON.stringify(res))});
         }
         location.href="wvjbscheme://__BRIDGE_LOADED__";
         setTimeout(xxx,2000);
