@@ -1,8 +1,8 @@
 <html>
-    <b>Hello showLoginPage!</b>
+    <b>Hello loginNotify!</b>
     <script>
         function xxx(){
-            WebViewJavascriptBridge.callHandler("showLoginPage",function(res){alert(JSON.stringify(res))});
+            WebViewJavascriptBridge.callHandler("loginNotify",function(res){alert(JSON.stringify(res))});
         }
         location.href="wvjbscheme://__BRIDGE_LOADED__";
         setTimeout(xxx,2000);
