@@ -1,8 +1,8 @@
 <html>
-    <b>Hello getDeviceInfo!</b>
+    <b>Hello checkAlbum!</b>
     <script>
         function xxx(){
-            WebViewJavascriptBridge.callHandler("getDeviceInfo",function(res){alert(JSON.stringify(res))});
+            WebViewJavascriptBridge.callHandler("checkAlbum",function(res){alert(JSON.stringify(res))});
         }
         location.href="wvjbscheme://__BRIDGE_LOADED__";
         setTimeout(xxx,2000);
