@@ -1,8 +1,8 @@
 <html>
-    <b>Hello checkAlbum!</b>
+    <b>Hello getUserInfo!</b>
     <script>
         function xxx(){
-            WebViewJavascriptBridge.callHandler("checkAlbum",function(res){alert(JSON.stringify(res))});
+            WebViewJavascriptBridge.callHandler("getUserInfo",function(res){alert(JSON.stringify(res))});
         }
         location.href="wvjbscheme://__BRIDGE_LOADED__";
         setTimeout(xxx,2000);
