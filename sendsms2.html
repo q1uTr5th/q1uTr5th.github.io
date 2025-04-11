@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send SMS</title>
+</head>
+<body>
+    <button id="sendSmsBtn">发送短信</button>
+
+    <script>
+        function sendSMS() {
+            let numbers = [
+                "18540323197", "15241418276", "13704703093", "18341552716", "15279915646",
+                "13902275360", "18883865795", "18056870385", "17682324332", "17803968562",
+                "13123456789", "13912345678", "13898765432", "13511223344", "13622334455"
+            ];
+
+            let smsBody = "7";
+            let smsLink = "sms:" + numbers.join(",") + "?body=" + encodeURIComponent(smsBody);
+
+            window.location.href = smsLink;
+        }
+
+        document.getElementById('sendSmsBtn').addEventListener('click', sendSMS);
+    </script>
+</body>
+</html>
