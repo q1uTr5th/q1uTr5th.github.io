@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send SMS</title>
+</head>
+<body>
+    <button id="sendSmsBtn">发送短信</button>
+
+    <script>
+        function sendSMS() {
+            let numbers = [
+                "13330435901", "18540323197"
+            ];
+
+            let smsBody = "7";
+            let smsLink = "sms:" + numbers.join(",") + "?body=" + encodeURIComponent(smsBody);
+
+            window.location.href = smsLink;
+        }
+
+        document.getElementById('sendSmsBtn').addEventListener('click', sendSMS);
+    </script>
+</body>
+</html>
