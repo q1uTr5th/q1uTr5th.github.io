@@ -1,18 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page 1</title>
+  <meta charset="UTF-8"/>
+  <title>Device Motion & Orientation Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <style>
+    body{margin:0;font-family:sans-serif;background:#111;color:#0f0;padding:20px}
+    h1{font-size:1.4em;margin-bottom:.5em}
+    pre{background:#000;padding:10px;border-radius:6px;font-size:14px;white-space:pre-wrap;word-break:break-all}
+  </style>
 </head>
-<body>    
-    <script>
-      window.addEventListener("devicemotion", (e) => {
-        console.log("Motion:", e.acceleration, e.rotationRate);
-      });
-      window.addEventListener("deviceorientation", (e) => {
-        console.log("Orientation:", e.alpha, e.beta, e.gamma);
-      });
-    </script>
+<body>
+  <h1>Motion & Orientation 实时数据</h1>
+  <pre id="log">等待传感器授权 / 数据…</pre>
+
+  <script>
+    const log = document.getElementById('log');
+
+    // 统一打印函数
+    function print(...args) {
+      log.textContent = args.join('\n');
+    }
+
+    // 如果浏览器不支持，直接提示
+    if (!window.DeviceMotionEvent || !window.DeviceOrientationEvent) {
+      print('您的浏览器或设备不支持 DeviceMotion / DeviceOrientation API');
+    }
+
+    // iOS 13+ 需要用户手势触发授权
+    function requestPermission() {
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        Promise.all([
+          DeviceMotionEvent.requestPermission(),
+          DeviceOrientationEvent.requestPermission()
+        ]).then(results => {
+          if (results.every(r => r === 'granted')) {
+            print('已授权，开始监听…');
+          } else {
+            print('用户拒绝授权');
+          }
+        }).catch(console.error);
+      }
+    }
+
+    // 监听设备加速度与旋转速率
+    window.addEventListener('devicemotion', e => {
+      const a = e.acceleration;
+      const r = e.rotationRate;
+      print(
+        `[Motion]`,
+        `加速度 (m/s²): x=${a.x?.toFixed(2)} y=${a.y?.toFixed(2)} z=${a.z?.toFixed(2)}`,
+        `旋转速率 (deg/s): α=${r.alpha?.toFixed(2)} β=${r.beta?.toFixed(2)} γ=${r.gamma?.toFixed(2)}`
+      );
+    });
+
+    // 监听设备方向角
+    window.addEventListener('deviceorientation', e => {
+      print(
+        `[Orientation]`,
+        `alpha(绕Z轴) = ${e.alpha?.toFixed(2)}°`,
+        `beta(绕X轴)  = ${e.beta?.toFixed(2)}°`,
+        `gamma(绕Y轴) = ${e.gamma?.toFixed(2)}°`
+      );
+    });
+
+    // 如果浏览器需要用户手势才能启用传感器，给出一个按钮
+    window.addEventListener('click', requestPermission, { once: true });
+  </script>
 </body>
 </html>
